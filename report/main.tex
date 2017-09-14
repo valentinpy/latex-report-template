@@ -1,0 +1,70 @@
+%for search with vim and okular
+\synctex=1
+
+
+\input{../template/template}
+\input{../template/macros}
+
+
+%% ========================================================================
+%%  TODO: Enable/Disable
+%% ========================================================================
+\setboolean{myaddlistoftodos}{false}  %% "true" or "false"
+%% If set to "true": the current list of open todos is added after the
+%% table of contents. If \mytodonotesoptions is set to "disable", no
+%% list of todos is added, independent of this setting here.
+
+%----------------------------------------------------------------------------------------
+%	\begin{document}
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+\frontmatter
+
+\input{../template/mytitlepage}
+
+\cleardoublepage
+
+%----------------------------------------------------------------------------------------
+%	Abstract
+%----------------------------------------------------------------------------------------
+% \include{chapter/00_abstract}
+% \clearpage
+
+%----------------------------------------------------------------------------------------
+%	List of Contents/Figures/Tables
+%----------------------------------------------------------------------------------------
+\tableofcontents
+%\listoffigures
+
+\ifthenelse{\boolean{myaddlistoftodos}}{
+  \newpage\todototoc \listoftodos          %% handy if you are using todonotes with \todo{}
+}{}
+
+%----------------------------------------------------------------------------------------
+%	Body
+%----------------------------------------------------------------------------------------
+\mainmatter
+
+% Chapter file here
+\include{chapter/01_introduction}
+
+\include{chapter/10_examples}
+\include{chapter/20_TLS}
+
+\include{chapter/99_conclusion}
+
+%----------------------------------------------------------------------------------------
+%	Bibliography
+%----------------------------------------------------------------------------------------
+
+%% prints every entry of the bib file -- useful in a state where is no cite
+\appendix
+\nocite{*}
+\printbibliography
+
+
+%----------------------------------------------------------------------------------------
+%	\end{document}
+%----------------------------------------------------------------------------------------
+\end{document}

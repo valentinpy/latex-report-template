@@ -1,0 +1,27 @@
+% 3 images at the top of the title page
+\titlehead{
+\begin{minipage}{16cm}
+	\centering
+	\raisebox{-0.5\height}{\includegraphics[width=35mm]{../figures/titlepage_fig/hes-so.jpg}}
+	\hspace*{1.3cm}
+	\raisebox{-0.5\height}{\includegraphics[width=35mm]{../figures/titlepage_fig/mse.jpg}}
+	\hspace*{1.3cm}
+	\raisebox{-0.5\height}{\includegraphics[width=50mm]{../figures/titlepage_fig/he-arc.pdf}}
+	\vspace{1.0cm}
+\end{minipage}
+}
+
+% Add text from #defines.tex
+\subject{\mydocumentsubject}
+\title{\mysubject}
+\author{\myauthor}
+
+\publishers{%\myinstitute\\
+						\myfaculty\\
+						\myuniversity\\
+						\vspace{0.5cm}
+						\myinstitutehead\\
+						\mysupervisor
+}
+
+\maketitle

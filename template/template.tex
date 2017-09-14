@@ -1,0 +1,269 @@
+%%=====================================================================================
+% Settings
+%%=====================================================================================
+\newcommand{\mypapersize}{A4}
+\newcommand{\mylaterality}{oneside} %% "oneside" or "twoside"
+\newcommand{\myparskip}{half}
+\newcommand{\myfontsize}{11pt}
+\newcommand{\mylinespread}{singlespacing} % e.g.onehalfspacing, doublespacing, singlespacing
+\newcommand{\mylanguage}{francais} %american
+
+\documentclass[%
+  fontsize=\myfontsize,
+	paper=\mypapersize,
+	parskip=\myparskip,
+	DIV=calc,
+	headinclude=true,
+	footinclude=true,
+	open=right,
+	appendixprefix=true,	% include appendix?
+	bibliography=totoc,		% include an unnumbered unit of bibliography to the table of contents
+	BCOR=10mm,        	  % binding correction (depends on how you bind
+	\mylaterality,        % alternative: twoside
+  \mylanguage
+]{scrbook}
+
+%Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% language adaptions
+\usepackage[\mylanguage]{babel}
+
+\input{../template/defines}
+\input{../template/colors}
+
+
+%%=====================================================================================
+%% includes pictures --> possible to include them in header/footer
+%%=====================================================================================
+\usepackage[pdftex]{graphicx}
+
+
+%%=====================================================================================
+%% Style
+%%=====================================================================================
+% override some list packages that they use babel -> see koma script doc
+\usepackage{scrhack}
+
+% nicer quotes
+\usepackage[%
+  autostyle,          % adapts language setting
+  strict,             % turns warnings into errors
+  english=american    % use american quotes style
+]{csquotes}
+
+\usepackage[automark]{scrpage2}							% allows usage of header and footer
+\usepackage[perpage, hang]{footmisc} 				% footnote options
+
+\renewcommand{\headfont}{\normalfont\sffamily\color{DispositionColor}}
+\renewcommand{\pnumfont}{\normalfont\sffamily\color{DispositionColor}}
+\addtokomafont{disposition}{\color{DispositionColor}}
+\addtokomafont{caption}{\color{DispositionColor}\footnotesize}
+\addtokomafont{captionlabel}{\color{DispositionColor}}
+
+\usepackage{calc} %% used for calculation of header footer etc. ...
+
+%% change page layout
+\addtolength{\oddsidemargin}{-.875in}
+\addtolength{\evensidemargin}{-.875in}
+\addtolength{\textwidth}{1.75in}
+\addtolength{\topmargin}{-.875in}
+\addtolength{\textheight}{3in}  %1.75
+
+% header and footer
+\pagestyle{scrheadings}							% for customization for header and footer
+\renewcommand{\chapterpagestyle}{scrheadings}	% include header and footer on chapter pages
+\clearscrheadfoot
+
+% http://ctan.uib.no/macros/latex/contrib/koma-script/doc/scrguien.pdf
+% page 204
+\ihead{\myshortsubject}
+\ifoot{\vspace{-0.25cm}\myauthor}
+\ofoot{ \vspace{-0.25cm} \thepage}
+\automark{chapter}
+\setheadsepline[ \textwidth + 5pt ]{1pt} % seperation line for header...
+\setfootsepline[ \textwidth + 5pt ]{1pt} % ... and footer
+\setkomafont{footsepline}{\color{red}} 	 % change colors of seperation lines
+\setkomafont{headsepline}{\color{red}}
+
+%%=====================================================================================
+%% Table on Contents
+%%=====================================================================================
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{1}
+
+\usepackage{makecell}
+
+\usepackage{tabulary}
+\newcolumntype{K}[1]{>{\centering\arraybackslash}p{#1}}
+
+\usepackage{verbatim}
+
+
+%%=====================================================================================
+%% bibliography with biber/biblatex
+%%=====================================================================================
+\usepackage[backend=biber, %% using "biber" to compile references (instead of "biblatex")
+            style=numeric, %% see biblatex documentation
+            style=alphabetic, %% see biblatex documentation
+            backref=true, %% create backlings from references to citations
+            natbib=true, %% offering natbib-compatible commands
+            hyperref=true,
+            sorting=none, %% using hyperref-package references
+]{biblatex}
+
+\addbibresource{bib/bibliography.bib}
+
+
+%%=====================================================================================
+%% SIUNITSX -- simplified usage of SI-units
+%%=====================================================================================
+\usepackage[
+            group-digits=false,
+            exponent-product = \cdot, % use \cdot instead * for exponent product
+            binary-units=true,
+            load-configurations=binary,
+            load-configurations=abbreviations,
+]{siunitx}
+
+% Easy typesetting hex and bin and oct
+\usepackage[autolanguage, nosepfour]{numprint}
+\usepackage{nbaseprt}
+
+%%=====================================================================================
+%% ifthen and todonotes puts to-do-notes in the printed document if you want
+%%=====================================================================================
+%% used to disable todonotes package
+\usepackage{ifthen}
+\newboolean{myaddlistoftodos}
+\usepackage[english]{todonotes}
+
+%%=====================================================================================
+%% Tables, figures, enums, etc...
+%%=====================================================================================
+%% nice rule's for tables try \toprule \midrule \bottomrule
+\usepackage{booktabs}
+
+%% set width of table and more
+\usepackage{tabularx}										% creates tables
+
+%% rotate tables and figures
+\usepackage{rotating}
+
+%% define caption style
+\addtokomafont{caption}{\small} 	% small captions
+\usepackage[font=small, width=0.9\textwidth, format=plain, labelfont=bf]{caption}
+
+%%
+\usepackage{subfigure}
+\usepackage{placeins}
+
+%% customize item look
+\usepackage{enumitem}
+
+%%=====================================================================================
+%% some utility stuff
+%%=====================================================================================
+% improved typographical settings
+\usepackage[%
+    protrusion=true, %
+    factor=900       %
+]{microtype}
+
+%% switch of extra space after punctuation
+\frenchspacing
+
+%% switches to Palatino with small caps and old style figures
+\usepackage[%
+            sc,%
+            osf,%
+]{mathpazo}
+
+%% kills space between items
+\setlist{noitemsep}
+
+%doc% For additional special characters available by \verb#\ding{}#
+\usepackage{pifont}  %% Sonderzeichen fuer Titelseite \ding{}
+
+%doc% This package is required for intelligent spacing after commands
+\usepackage{xspace}
+
+%doc% This package offers strikethrough command \verb+\sout{foobar}+.
+\usepackage[normalem]{ulem}
+
+%% prevent club & widow penalty
+\clubpenalty10000
+\widowpenalty10000
+\displaywidowpenalty10000
+
+
+
+
+%%=====================================================================================
+%% lslistening: used to include source code
+%%=====================================================================================
+\usepackage{listings}				% include source code
+
+\lstset{% 							% options for representation of source code
+  backgroundcolor=\color{grey},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % ses the caption-position to bottom
+  commentstyle=\color{dkgreen}, % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  frame=lines,                     % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=C,                      % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=8pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{gray},   % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{blue},        % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname,                  % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%theme for C
+\lstdefinestyle{C}{
+	language=c, showspaces=false,
+	keywordstyle=		\color{blue}\scriptsize,
+	commentstyle=	  \color{dkgreen}\scriptsize\sffamily,
+	stringstyle=		\color{mauve}\scriptsize,
+	title=\lstname,
+	escapeinside={//(*}{*)},
+	morekeywords={},
+	numbers = left, numberstyle=\tiny\color{black}
+}
+
+%%=====================================================================================
+%% pdfcompresslevel from 0 to 10; std is fine
+%%=====================================================================================
+\pdfcompresslevel=9
+
+%%=====================================================================================
+%% Hyperref should always be the last package added --
+%%=====================================================================================
+\usepackage[%							% enables typesettings for hyperlinks
+	pdftitle={\mysubject},%
+	pdfauthor = {\myauthor},%
+	pdfsubject = {\mysubject},%
+  colorlinks={false},
+  pdfcreator={pdfTex},%
+  pdfkeywords={\mykeywords},%
+  pdftex = true,%
+  backref,%
+  pagebackref=false, % creates backward references too
+  bookmarks=True, %
+  bookmarksopen=false, % when starting with AcrobatReader, the Bookmarkcolumn is opened
+  pdfpagemode=UseOutlines,% None, UseOutlines, UseThumbs, FullScreen
+  plainpages=false % correct, if pdflatex complains: ``destination with same identifier already exists''
+]{hyperref}								% should be the last package to be inlcuded!

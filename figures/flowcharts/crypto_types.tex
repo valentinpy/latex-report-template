@@ -1,0 +1,67 @@
+\documentclass{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage{xcolor}
+
+\definecolor{mygray}{cmyk}{0,0,0,0.4}%
+\definecolor{mydarkgray}{cmyk}{0,0,0,0.7}%
+\definecolor{mylightgray}{cmyk}{0,0,0,0.1}%
+
+\usepackage[margin=0.5cm]{geometry}
+
+\begin{document}
+\pagestyle{empty}
+
+
+% Define block styles
+\tikzstyle{decision} = [diamond, draw, fill=mylightgray, text width=5.5em, text badly centered, node distance=3cm, inner sep=0pt, minimum width=3cm, minimum height=1cm]
+\tikzstyle{block} = [rectangle, draw, fill=mylightgray,  text centered, rounded corners, minimum width=1.5cm, minimum height=1cm]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=mydarkgray, node distance=3cm, minimum height=2em]
+\tikzstyle{blank} = [node distance=0cm]
+ 
+\begin{tikzpicture}[node distance = 2cm, auto]
+    % Place nodes
+	\node [block] (crypto) {Cryptography};
+	
+	\node [block, below of=crypto, node distance=3cm] (sym1) {Symetric Cryptography};
+	\node [block, below of=sym1, node distance=2cm] (sym2) {AES};
+	\node [block, left of=sym2, node distance=2cm] (sym3) {RC4};
+	\node [block, right of=sym2, node distance=2cm] (sym4) {3DES};
+	
+	\node [block, left of=sym1, node distance=6cm] (oneWay) {One way algorithms};
+	\node [block, below of=oneWay, node distance=2cm] (oneWay1) {Hashes};
+	\node [block, below of=oneWay1, node distance=2cm] (oneWay2) {SHA-1};
+	\node [block, left of=oneWay2, node distance=2cm] (oneWay3) {MD5};
+	\node [block, right of=oneWay2, node distance=2cm] (oneWay4) {SHA-2};
+	
+	\node [block, right of=sym1, node distance=6cm] (asym1) {Asymetric Cryptography};
+	\node [block, below of=asym1, node distance=2cm] (asym2) {RSA};
+	\node [block, left of=asym2, node distance=2cm] (asym3) {DH};
+	\node [block, right of=asym2, node distance=2cm] (asym4) {ECDH};
+
+    % Draw edges
+
+	\path [line] (crypto) -- (0, -1.5) -| (oneWay);
+	\path [line] (crypto) -- (0, -1.5) -| (sym1);
+	\path [line] (crypto) -- (0, -1.5) -| (asym1);
+
+	\path [line] (oneWay) -- (oneWay1);
+
+	\path [line] (sym1) -- (0, -4) -| (sym2);
+	\path [line] (sym1) -- (0, -4) -| (sym3);
+	\path [line] (sym1) -- (0, -4) -| (sym4);
+
+	\path [line] (oneWay1) -- (-6, -6) -| (oneWay2);
+	\path [line] (oneWay1) -- (-6, -6) -| (oneWay3);
+	\path [line] (oneWay1) -- (-6, -6) -| (oneWay4);
+
+	\path [line] (asym1) -- (6, -4) -| (asym2);
+	\path [line] (asym1) -- (6, -4) -| (asym3);
+	\path [line] (asym1) -- (6, -4) -| (asym4);
+\end{tikzpicture}
+   
+\end{document}
+

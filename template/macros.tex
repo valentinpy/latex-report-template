@@ -1,0 +1,26 @@
+%---------------------------------------------------------------------------------------------------
+% units
+%---------------------------------------------------------------------------------------------------
+\newcommand{\hexnum}[1]{\texttt{0x#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\newcommand{\cm}{\ensuremath{\mathrm{cm}}\xspace}
+\newcommand{\m}{\ensuremath{\mathrm{m}}\xspace}
+\newcommand{\mm}{\ensuremath{\mathrm{mm}}\xspace}
+\newcommand{\microm}{\ensuremath{\mu\mathrm{m}}\xspace}
+\newcommand{\s}{\ensuremath{\mathrm{s}}\xspace}
+\newcommand{\musec}{\ensuremath{\mu\mathrm{s}}\xspace}
+
+
+%---------------------------------------------------------------------------------------------------
+% include figures
+%---------------------------------------------------------------------------------------------------
+\newcommand{\myfig}[5]{
+\begin{figure}%[htp]
+  \begin{center}
+     \includegraphics[keepaspectratio,#2]{figures/#1}
+     \caption[#4]{#3}
+     \label{#5} %% NOTE: always label *after* caption!
+  \end{center}
+\end{figure}
+}
