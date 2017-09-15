@@ -51,6 +51,7 @@
 *.ps
 main.ps
 main.txt
+main.pdf
 
 .settings/
 .cproject
