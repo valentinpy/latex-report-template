@@ -43,9 +43,6 @@
 *.bib
 *.blg
 
-#pdf
-*.pdf
-
 #others
 *.lst
 *.swp
